@@ -10,7 +10,7 @@
   },
   "servers": [
     {
-      "url": "http://sandbox.mintlify.com"
+      "url": "http://172.16.101.17:3001"
     }
   ],
   "security": [
@@ -128,6 +128,70 @@
           }
         }
       }
+    },
+    "/api/v1/accounts": {
+      "post": {
+        "description": "Create a new account",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateAccountRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful account creation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateAccountResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/gen-key-pair": {
+      "get": {
+        "description": "Generate a new key pair",
+        "responses": {
+          "200": {
+            "description": "Successful key pair generation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenKeyPairResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -181,6 +245,50 @@
           },
           "message": {
             "type": "string"
+          }
+        }
+      },
+      "CreateAccountRequest": {
+        "type": "object",
+        "required": ["public_key"],
+        "properties": {
+          "public_key": {
+            "type": "string",
+            "description": "The public key of the account"
+          }
+        }
+      },
+      "CreateAccountResponse": {
+        "type": "object",
+        "required": ["tx_hash"],
+        "properties": {
+          "tx_hash": {
+            "type": "string",
+            "description": "The transaction hash of the account creation"
+          }
+        }
+      },
+      "GenKeyPairResponse": {
+        "type": "object",
+        "required": ["public_key", "private_key"],
+        "properties": {
+          "public_key": {
+            "type": "string",
+            "description": "The generated public key"
+          },
+          "private_key": {
+            "type": "object",
+            "required": ["digest_function", "payload"],
+            "properties": {
+              "digest_function": {
+                "type": "string",
+                "description": "The digest function used for the private key"
+              },
+              "payload": {
+                "type": "string",
+                "description": "The payload of the private key"
+              }
+            }
           }
         }
       }

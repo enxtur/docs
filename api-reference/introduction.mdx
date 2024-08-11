@@ -1,33 +1,31 @@
 ---
 title: 'Introduction'
-description: 'Example section for showcasing API endpoints'
+description: 'Welcome to the API Reference'
 ---
 
-<Note>
-  If you're not looking to build API reference documentation, you can delete
-  this section by removing the api-reference folder.
-</Note>
+# Getting Started with Iroha 2 API
 
-## Welcome
+This guide will help you get started with the Iroha 2 blockchain platform using our API. Follow these steps to create your first account:
 
-There are two ways to build API documentation: [OpenAPI](https://mintlify.com/docs/api-playground/openapi/setup) and [MDX components](https://mintlify.com/docs/api-playground/mdx/configuration). For the starter kit, we are using the following OpenAPI specification.
+## 1. Generate a Key Pair
 
-<Card
-  title="Plant Store Endpoints"
-  icon="leaf"
-  href="https://github.com/mintlify/starter/blob/main/api-reference/openapi.json"
->
-  View the OpenAPI specification file
-</Card>
+Before creating an account, you need to generate a cryptographic key pair. You have two options:
 
-## Authentication
+a) Use our API:
+   - Endpoint: `GET /api/v1/gen-key-pair`
+   - This will return a public key and a private key
 
-All API endpoints are authenticated using Bearer tokens and picked up from the specification file.
+b) Use Iroha's official SDK:
+   - Visit the [Iroha 2 Documentation](https://hyperledger.github.io/iroha-2-docs/guide/get-started/)
+   - Follow their guide to generate a key pair programmatically
 
-```json
-"security": [
-  {
-    "bearerAuth": []
-  }
-]
-```
+## 2. Create an Account
+
+Once you have your key pair, you can create an account:
+
+- Endpoint: `POST /api/v1/accounts`
+- Use the public key from step 1 in the request body
+
+## Next Steps
+
+You can explore [Iroha 2 Documentation](https://hyperledger.github.io/iroha-2-docs/guide/get-started/)
