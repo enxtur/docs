@@ -45,7 +45,8 @@
       "group": "Endpoints",
       "pages": [
         "api-reference/endpoint/gen-key-pair",
-        "api-reference/endpoint/create"
+        "api-reference/endpoint/create",
+        "api-reference/endpoint/faucet"
       ]
     }
   ]

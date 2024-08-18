@@ -192,6 +192,43 @@
           }
         }
       }
+    },
+    "/api/v1/faucet": {
+      "post": {
+        "description": "Request tokens from the faucet",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FaucetRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful faucet request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FaucetResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -289,6 +326,30 @@
                 "description": "The payload of the private key"
               }
             }
+          }
+        }
+      },
+      "FaucetRequest": {
+        "type": "object",
+        "required": ["account_id", "asset_definition_id"],
+        "properties": {
+          "account_id": {
+            "type": "string",
+            "description": "The account ID to receive tokens"
+          },
+          "asset_definition_id": {
+            "type": "string",
+            "description": "The asset definition ID of the tokens to be received"
+          }
+        }
+      },
+      "FaucetResponse": {
+        "type": "object",
+        "required": ["tx_hash"],
+        "properties": {
+          "tx_hash": {
+            "type": "string",
+            "description": "The transaction hash of the faucet request"
           }
         }
       }
